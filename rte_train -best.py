@@ -35,6 +35,9 @@ for m in root.findall("pair"):
     t_flag=True
     h_flag=True
     flag=True
+#########################
+#Negative word processig#
+#########################
     for i in range(len(t_t)):
         t_t_t[i]=list(t_t_t[i])
         t_t_t[i].append("")
@@ -72,6 +75,10 @@ for m in root.findall("pair"):
             for j in range(len(h_t)-i-1):
                 if(t_h_t[i+j][1] in ["NN","NNS","NNP","NNPS"]):
                     t_h_t[i+j][2]="~"
+######################
+#End of Preprocessing#
+######################
+
         elif(t_h_t[i][1]=="NN")|(t_h_t[i][1]=="NNS")|(t_h_t[i][1]=="NNP")|(t_h_t[i][1]=="NNPS"):
             #print("nnnnnnnnnn")
             if h_t[i] not in t_t:
@@ -165,7 +172,7 @@ for m in root.findall("pair"):
                                     if (len(wordnet.synsets(t_t[j]))!=0):
                                         if(len(set(wordnet.synsets(t_t[j])[0].lemma_names()).intersection(lemma.name()))>0):
                                             Match=True
-                                            if (((t_h_t[i][1]=="VBN")&(t_t_t[j][1]!="VBN"))|((t_h_t[i][1]!="VBN")&(t_t_t[j][1]=="VBN"))):
+                                            if (((t_h_t[i][1]=="VBN")&(t_t_t[j][1]!="VBN"))|((t_h_t[i][1]!="VBN")&(t_t_t[j][1]=="VBN"))):  #This statement means case, "T : I give a book to giyoung, H : I was given book from giyoung"
                                                 if flag==True:
                                                     flag=False
                                                 else:
